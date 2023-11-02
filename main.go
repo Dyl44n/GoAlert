@@ -13,7 +13,6 @@ func main() {
 	password := os.Getenv("GMAIL_PASSWORD")
 	if password == "" {
 		panic("GMAIL_PASSWORD não foi configurado")
-		os.Exit(1)
 	}
 	to := []string{
 		"kagarinomiko@gmail.com",
@@ -38,4 +37,10 @@ func main() {
 		Error:   "Erro ao acessar o servidor.",
 		Horario: "10/12/2022 14:00",
 	})
+	err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, body.Bytes())
+	if err != nil {
+		fmt.Printf("Erro ao enviar o email: %s", err)
+		return
+	}
+	fmt.Println("Email enviado com sucesso!!")
 }
