@@ -1,7 +1,8 @@
 package main
 
 import (
-	"alertmanager/sms"
+	"alertmanager/telegram"
+	"os"
 )
 
 func main() {
@@ -12,5 +13,7 @@ func main() {
 	//		"06/04/2022 15:00",
 	//		"./email/template.html")
 	// slack.SendSlack("Alerta de servidor down: Google\n Erro: Erro ao conectar no servidor\n Horario: 06/04/2023 15:55\n")
-	sms.SendSMS("Alerta de servidor down: Google\n Erro: Erro ao conectar no servidor\n Horario: 06/04/2023 15:55\n", "551199888888")
+	// sms.SendSMS("Alerta de servidor down: Google\n Erro: Erro ao conectar no servidor\n Horario: 06/04/2023 15:55\n", "551199888888")
+	botApi := os.Getenv("BOT_API")
+	telegram.SendTelegram(botApi, "Alerta de servidor down: Google\n Erro: Erro ao conectar no servidor\n Horario: 06/04/2023 15:55\n, 551199888888")
 }
